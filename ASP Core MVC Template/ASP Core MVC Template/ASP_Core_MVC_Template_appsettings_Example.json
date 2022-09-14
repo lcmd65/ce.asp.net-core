@@ -1,0 +1,38 @@
+{
+  "Logging": {
+    "IncludeScopes": false,
+    "LogLevel": {
+      "Default": "Debug",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "Databases": {
+    "Audit": {
+      "Database": "FMUTILITYDEV",
+      "Username": "FMUTILITY_USER"
+    }
+  },
+  "SecureAuth": {
+    "RedirectURL": "<insert redirect URL from SecureAuth metadata",
+    "TokenName": "<set a token name that makes sense for your app>",
+    "ValidationKey": "<insert the validation key that the SecureAuth team sent you>",
+    "DecryptionKey": "<insert the decryption key that the SecureAuth team sent you>",
+    "UseCompatibilityMode20SP2": true
+  },
+  "FMDataAPIKey": "000b5059-8455-411a-9016-8946187ad962",
+  "FMDataAPIURL": "https://dev-fmitservices.gsa.gov",
+  "CookieAuthentication": {
+    "ExpireMinutes": "30",
+    "SessionExpireNotificationMinutes": "5"
+  },
+  "Footer": {
+    "LeftLink": "https://www.gsa.gov",
+    "LeftLabel": "GSA.gov",
+    "CenterLink": "https://insite.gsa.gov/organizations/staff-offices/office-of-gsa-it/gsa-it-organizations/office-of-corporate-it-services-ic",
+    "CenterLabel": "Corporate IT Services",
+    "RightLink": "mailto:bdf.apps@gsa.gov",
+    "RightLabel" : "Email Us"
+  }
+}

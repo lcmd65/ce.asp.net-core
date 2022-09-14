@@ -1,0 +1,163 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Core Web Template *** FOR U.S. GOVERNMENT USE ONLY ***</title>
+    <link href="~/lib/kendo-ui/styles/kendo.common-material.min.css" rel="stylesheet" />
+    <link href="~/lib/kendo-ui/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+    <link href="~/lib/kendo-ui/styles/kendo.material.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/uswds-2.3.1/css/uswds.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    </environment>
+    <environment exclude="Development">
+        @* Remove BootstrapCDN *@
+        <link rel="stylesheet" href="~/uswds-2.3.1/css/uswds.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+    <script src="~/lib/kendo-ui/js/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/kendo-ui/js/jszip.min.js"></script>
+    <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
+    <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"></script>
+    <script src="~/uswds-2.3.1/js/uswds.min.js"></script>
+</head>
+<body class="page-page-templates layout-styleguide">
+    <a id="top"></a>
+    <a class="usa-skipnav" href="#main-content">Skip to main content</a>
+    <section class="usa-banner">
+        <div class="usa-accordion">
+            <header class="usa-banner__header usa-banner__header--expanded">
+                <div class="grid-container usa-banner__inner">
+                    <img class="usa-banner__header-flag " src="~/uswds-2.3.1/img/us_flag_small.png" alt="U.S. flag">
+                    <span class="usa-banner__header-text">An official website of the United States government</span>
+                    <button class="usa-accordion__button usa-banner__button"
+                            aria-expanded="false" aria-controls="gov-banner">
+                        <span class="usa-banner__button-text">Here's how you know</span>
+                    </button>
+                </div>
+            </header>
+            <div class="usa-banner__content grid-container usa-accordion__content" id="gov-banner">
+                <div class="grid-row">
+                    <div class="usa-banner__guidance grid-col-6">
+                        <img class="usa-banner__icon usa-media-block__img" src="~/uswds-2.3.1/img/icon-dot-gov.svg" alt="Dot gov">
+                        <div class="usa-media-block__body">
+                            <p>
+                                <strong>The .gov means it’s official.</strong>
+                                <br>
+                                Federal government websites often end in .gov or .mil. Before sharing sensitive information, make sure you’re on a federal government site.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="usa-banner__guidance grid-col-6">
+                        <img class="usa-banner__icon usa-media-block__img" src="~/uswds-2.3.1/img/icon-https.svg" alt="Https">
+                        <div class="usa-media-block__body">
+                            <p>
+                                <strong>The site is secure.</strong>
+                                <br>
+                                The <strong>https://</strong> ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @*Body section*@
+
+    <header class="usa-header usa-header--basic">
+        <div class="usa-nav-container">
+            <div class="usa-navbar">
+                <div class="usa-logo">
+                    <img class="usa-header-slim-logo-img" src="~/images/gsa/nav-logo.jpg" alt="" hspace="5">
+                    <em class="usa-logo__text">
+                        <a href="~/"
+                           class="app-header"
+                           title="Home"
+                           aria-label="Home">
+                            Core Web Template
+                        </a>
+                    </em>
+                </div>
+                <button class="usa-menu-btn">Menu</button>
+            </div>
+
+            @* Navigation bar in the header *@
+            <nav aria-label="Primary navigation" class="usa-nav">
+                <button class="usa-nav__close">
+                    <img src="~/uswds-2.3.1/img/close.svg" alt="close">
+                </button>
+                <ul class="usa-nav__primary usa-accordion">
+                    @* App closure hides the menu. *@
+                    @if (ViewData["closeMessage"] == null)
+                    {
+                        <li class="usa-nav__primary-item">
+                            @if (Context.User.Identity.IsAuthenticated)
+                            {
+                                <a class="usa-nav__link" asp-controller="Login" asp-action="LogoutAsync">
+                                    <span>Log Out (@Context.User.Identity.Name)</span>
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="usa-nav__link" asp-controller="Login" asp-action="LoginAsync">
+                                    <span>Log In</span>
+                                </a>
+                            }
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="usa-overlay"></div>
+    <main id="main-content"></main>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer class="usa-footer usa-footer--slim">
+            <div class="grid-container usa-footer__return-to-top">
+                <a href="#top">Return to top</a>
+            </div>
+            <div class="usa-footer__primary-section">
+                <div class="usa-footer__primary-container grid-row">
+                    <div class="mobile-lg:grid-col-8">
+                        <nav class="usa-footer__nav">
+                            <ul class="grid-row grid-gap">
+                                <li class="mobile-lg:grid-col-6 desktop:grid-col-auto usa-footer__primary-content">
+                                    <a class="usa-footer__primary-link" href="@Configuration["Footer:LeftLink"]" target="_blank">@Configuration["Footer:LeftLabel"]</a>
+                                </li>
+                                <li class="mobile-lg:grid-col-6 desktop:grid-col-auto usa-footer__primary-content">
+                                    <a class="usa-footer__primary-link" href="@Configuration["Footer:CenterLink"]" target="_blank">@Configuration["Footer:CenterLabel"]</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="mobile-lg:grid-col-4">
+                        <address class="usa-footer__nav">
+                            <ul class="grid-row grid-gap">
+                                <li class="mobile-lg:grid-col-12 desktop:grid-col-auto usa-footer__primary-content">
+                                    <a class="usa-footer__primary-link" href="@Configuration["Footer:RightLink"]">@Configuration["Footer:RightLabel"]</a>
+                                </li>
+                            </ul>
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @RenderSection("Scripts", required: false)
+    @await Html.PartialAsync("_SessionExpireNotification")
+</body>
+</html>

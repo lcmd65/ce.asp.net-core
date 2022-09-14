@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    @if (ViewData["closeMessage"] == null)
+    {
+        <h1 class="display-4">Welcome</h1>
+        <p>Click the Log In link above to test authentication and authorization against CAAM via the FM Data API.</p>
+    }
+    else
+    {
+        <h1 class="display-4">Application Closed</h1>
+        <p>@ViewData["closeMessage"].ToString()</p>
+    }
+    @if (ViewData["warningMessage"] != null)
+    {
+        <h1 class="display-4 text-red">Warning</h1>
+        <p>@ViewData["warningMessage"].ToString()</p>
+    }
+</div>
